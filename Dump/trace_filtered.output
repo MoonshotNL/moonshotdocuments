@@ -1,0 +1,604 @@
+__libc_start_main			
+g_type_init			
+g_getenv			
+gtk_init			
+g_free			
+g_direct_hash			
+g_free			
+g_direct_hash			
+g_free			
+g_direct_hash			
+g_free			
+g_direct_hash			
+<...	gtk_init	resumed>	)
+bindtextdomain			
+bind_textdomain_codeset			
+textdomain			
+g_once_init_enter			
+g_type_fundamental_next			
+g_type_register_fundamental			
+g_once_init_leave			
+g_type_create_instance			
+g_type_class_peek_parent			
+g_type_check_class_cast			
+g_type_class_add_private			
+g_type_instance_get_private			
+<...	g_type_create_instance	resumed>	)
+g_once_init_enter			
+g_type_register_static			
+g_once_init_leave			
+g_object_new			
+g_type_class_peek_parent			
+g_type_class_add_private			
+g_type_check_class_cast			
+g_signal_new			
+g_type_instance_get_private			
+<...	g_object_new	resumed>	)
+g_once_init_enter			
+g_type_register_static			
+g_once_init_enter			
+g_type_register_static			
+g_type_interface_add_prerequisite			
+g_once_init_leave			
+g_type_add_interface_static			
+g_once_init_leave			
+g_object_new			
+g_type_class_peek_parent			
+g_type_class_add_private			
+g_type_check_class_cast			
+g_type_interface_peek_parent			
+g_type_instance_get_private			
+<...	g_object_new	resumed>	)
+g_once_init_enter			
+g_type_register_static			
+g_once_init_leave			
+gee_linked_list_new			
+g_direct_hash			
+<...	gee_linked_list_new	resumed>	)
+gee_abstract_collection_clear			
+g_key_file_new			
+g_get_user_data_dir			
+g_build_filename			
+g_free			
+g_file_test			
+g_build_filename			
+g_key_file_load_from_file			
+fprintf			
+g_error_free			
+g_free			
+g_key_file_free			
+g_once_init_enter			
+gtk_window_get_type			
+g_type_register_static			
+g_once_init_leave			
+g_object_new			
+g_type_class_peek_parent			
+g_type_class_add_private			
+g_type_check_class_cast			
+g_direct_hash			
+g_type_instance_get_private			
+gtk_ui_manager_new			
+g_direct_hash			
+<...	g_object_new	resumed>	)
+g_object_ref			
+g_queue_new			
+g_hash_table_new_full			
+gtk_window_set_title			
+g_direct_hash			
+<...	gtk_window_set_title	resumed>	)
+gtk_window_set_position			
+g_direct_hash			
+<...	gtk_window_set_position	resumed>	)
+gtk_window_set_default_size			
+g_direct_hash			
+<...	gtk_window_set_default_size	resumed>	)
+gtk_action_group_new			
+g_direct_hash			
+<...	gtk_action_group_new	resumed>	)
+g_malloc0			
+g_realloc			
+gtk_action_group_add_actions			
+g_direct_hash			
+g_free			
+g_direct_hash			
+<...	gtk_action_group_add_actions	resumed>	)
+g_free			
+gtk_ui_manager_insert_action_group			
+g_direct_hash			
+<...	gtk_ui_manager_insert_action_group	resumed>	)
+gtk_ui_manager_add_ui_from_string			
+g_direct_hash			
+<...	gtk_ui_manager_add_ui_from_string	resumed>	)
+gtk_ui_manager_ensure_update			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+<...	gtk_ui_manager_ensure_update	resumed>	)
+g_object_unref			
+gtk_entry_new			
+g_direct_hash			
+g_free			
+g_direct_hash			
+<...	gtk_entry_new	resumed>	)
+g_object_ref_sink			
+g_dgettext			
+gtk_widget_get_accessible			
+g_object_ref			
+atk_object_set_name			
+atk_object_set_description			
+g_object_unref			
+gtk_icon_size_lookup			
+g_direct_hash			
+<...	gtk_icon_size_lookup	resumed>	)
+gtk_icon_theme_get_default			
+g_object_ref			
+gtk_icon_theme_load_icon			
+g_free			
+g_direct_hash			
+g_free			
+g_direct_hash			
+<...	gtk_icon_theme_load_icon	resumed>	)
+g_object_unref			
+gtk_entry_set_icon_from_pixbuf			
+g_direct_hash			
+<...	gtk_entry_set_icon_from_pixbuf	resumed>	)
+g_object_unref			
+g_dgettext			
+gtk_entry_set_icon_tooltip_text			
+g_direct_hash			
+<...	gtk_entry_set_icon_tooltip_text	resumed>	)
+gtk_entry_set_icon_sensitive			
+g_direct_hash			
+<...	gtk_entry_set_icon_sensitive	resumed>	)
+gtk_icon_size_lookup			
+gtk_icon_theme_get_default			
+g_object_ref			
+gtk_icon_theme_load_icon			
+g_direct_hash			
+<...	gtk_icon_theme_load_icon	resumed>	)
+g_object_unref			
+gtk_entry_set_icon_from_pixbuf			
+g_direct_hash			
+<...	gtk_entry_set_icon_from_pixbuf	resumed>	)
+g_object_unref			
+g_dgettext			
+gtk_entry_set_icon_tooltip_text			
+g_direct_hash			
+<...	gtk_entry_set_icon_tooltip_text	resumed>	)
+gtk_entry_set_icon_sensitive			
+g_direct_hash			
+<...	gtk_entry_set_icon_sensitive	resumed>	)
+g_signal_connect_object			
+g_direct_hash			
+<...	g_signal_connect_object	resumed>	)
+g_signal_connect_object			
+g_direct_hash			
+<...	g_signal_connect_object	resumed>	)
+g_signal_connect_object			
+g_direct_hash			
+<...	g_signal_connect_object	resumed>	)
+g_once_init_enter			
+gtk_vbox_get_type			
+g_type_register_static			
+g_once_init_leave			
+g_object_new			
+g_type_class_peek_parent			
+g_type_class_add_private			
+g_type_check_class_cast			
+g_once_init_enter			
+gtk_box_get_type			
+g_type_register_static			
+g_once_init_leave			
+g_param_spec_object			
+g_type_check_class_cast			
+g_object_class_install_property			
+g_type_instance_get_private			
+g_direct_hash			
+<...	g_object_new	resumed>	)
+g_object_ref			
+gtk_box_set_homogeneous			
+gtk_box_set_spacing			
+g_direct_hash			
+<...	gtk_box_set_spacing	resumed>	)
+g_object_ref_sink			
+gtk_viewport_new			
+g_direct_hash			
+<...	gtk_viewport_new	resumed>	)
+g_object_ref_sink			
+gtk_container_set_border_width			
+g_direct_hash			
+<...	gtk_container_set_border_width	resumed>	)
+gtk_viewport_set_shadow_type			
+g_direct_hash			
+<...	gtk_viewport_set_shadow_type	resumed>	)
+gtk_container_add			
+g_direct_hash			
+<...	gtk_container_add	resumed>	)
+gtk_scrolled_window_new			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+<...	gtk_scrolled_window_new	resumed>	)
+g_object_ref_sink			
+gtk_scrolled_window_set_policy			
+g_direct_hash			
+<...	gtk_scrolled_window_set_policy	resumed>	)
+gtk_scrolled_window_set_shadow_type			
+g_direct_hash			
+<...	gtk_scrolled_window_set_shadow_type	resumed>	)
+gtk_scrolled_window_add_with_viewport			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+<...	gtk_scrolled_window_add_with_viewport	resumed>	)
+gtk_vbox_new			
+g_direct_hash			
+<...	gtk_vbox_new	resumed>	)
+g_object_ref_sink			
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_widget_set_size_request			
+g_direct_hash			
+<...	gtk_widget_set_size_request	resumed>	)
+g_dgettext			
+gtk_label_new			
+g_direct_hash			
+<...	gtk_label_new	resumed>	)
+g_object_ref_sink			
+pango_font_description_new			
+pango_font_description_set_weight			
+gtk_widget_modify_font			
+g_object_unref			
+g_direct_hash			
+<...	g_object_unref	resumed>	)
+<...	gtk_widget_modify_font	resumed>	)
+pango_font_description_free			
+gtk_misc_set_alignment			
+g_direct_hash			
+<...	gtk_misc_set_alignment	resumed>	)
+g_dgettext			
+gtk_label_new			
+g_direct_hash			
+<...	gtk_label_new	resumed>	)
+g_object_ref_sink			
+gtk_misc_set_alignment			
+g_direct_hash			
+<...	gtk_misc_set_alignment	resumed>	)
+gtk_entry_new			
+g_direct_hash			
+<...	gtk_entry_new	resumed>	)
+g_object_ref_sink			
+g_dgettext			
+gtk_label_new			
+g_direct_hash			
+<...	gtk_label_new	resumed>	)
+g_object_ref_sink			
+gtk_misc_set_alignment			
+g_direct_hash			
+<...	gtk_misc_set_alignment	resumed>	)
+gtk_entry_new			
+g_direct_hash			
+<...	gtk_entry_new	resumed>	)
+g_object_ref_sink			
+gtk_entry_set_invisible_char			
+g_direct_hash			
+<...	gtk_entry_set_invisible_char	resumed>	)
+gtk_entry_set_visibility			
+g_direct_hash			
+<...	gtk_entry_set_visibility	resumed>	)
+g_dgettext			
+gtk_check_button_new_with_label			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+<...	gtk_check_button_new_with_label	resumed>	)
+g_object_ref_sink			
+gtk_table_new			
+g_direct_hash			
+<...	gtk_table_new	resumed>	)
+g_object_ref_sink			
+gtk_table_set_col_spacings			
+g_direct_hash			
+<...	gtk_table_set_col_spacings	resumed>	)
+gtk_table_set_row_spacings			
+g_direct_hash			
+<...	gtk_table_set_row_spacings	resumed>	)
+gtk_table_attach_defaults			
+g_direct_hash			
+<...	gtk_table_attach_defaults	resumed>	)
+gtk_table_attach_defaults			
+g_direct_hash			
+<...	gtk_table_attach_defaults	resumed>	)
+gtk_table_attach_defaults			
+g_direct_hash			
+<...	gtk_table_attach_defaults	resumed>	)
+gtk_table_attach_defaults			
+g_direct_hash			
+<...	gtk_table_attach_defaults	resumed>	)
+gtk_table_attach_defaults			
+g_direct_hash			
+<...	gtk_table_attach_defaults	resumed>	)
+gtk_alignment_new			
+g_direct_hash			
+<...	gtk_alignment_new	resumed>	)
+g_object_ref_sink			
+gtk_alignment_set_padding			
+g_direct_hash			
+<...	gtk_alignment_set_padding	resumed>	)
+gtk_container_add			
+g_direct_hash			
+<...	gtk_container_add	resumed>	)
+gtk_vbox_new			
+g_direct_hash			
+<...	gtk_vbox_new	resumed>	)
+g_object_ref_sink			
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+g_dgettext			
+gtk_label_new			
+g_direct_hash			
+<...	gtk_label_new	resumed>	)
+g_object_ref_sink			
+pango_font_description_new			
+pango_font_description_set_weight			
+gtk_widget_modify_font			
+g_object_unref			
+g_direct_hash			
+<...	g_object_unref	resumed>	)
+<...	gtk_widget_modify_font	resumed>	)
+pango_font_description_free			
+gtk_misc_set_alignment			
+g_direct_hash			
+<...	gtk_misc_set_alignment	resumed>	)
+gtk_alignment_new			
+g_direct_hash			
+<...	gtk_alignment_new	resumed>	)
+g_object_ref_sink			
+gtk_alignment_set_padding			
+g_direct_hash			
+<...	gtk_alignment_set_padding	resumed>	)
+gtk_vbox_new			
+g_direct_hash			
+<...	gtk_vbox_new	resumed>	)
+g_object_ref_sink			
+gtk_container_add			
+g_direct_hash			
+<...	gtk_container_add	resumed>	)
+gtk_vbox_new			
+g_direct_hash			
+<...	gtk_vbox_new	resumed>	)
+g_object_ref_sink			
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_vbox_new			
+g_direct_hash			
+<...	gtk_vbox_new	resumed>	)
+g_object_ref_sink			
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_hbox_new			
+g_direct_hash			
+<...	gtk_hbox_new	resumed>	)
+g_object_ref_sink			
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_vbox_new			
+g_direct_hash			
+<...	gtk_vbox_new	resumed>	)
+g_object_ref_sink			
+gtk_container_set_border_width			
+g_direct_hash			
+<...	gtk_container_set_border_width	resumed>	)
+gtk_ui_manager_get_widget			
+g_object_ref			
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_box_pack_start			
+g_direct_hash			
+<...	gtk_box_pack_start	resumed>	)
+gtk_container_add			
+g_direct_hash			
+<...	gtk_container_add	resumed>	)
+gtk_widget_show_all			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+<...	gtk_widget_show_all	resumed>	)
+gtk_widget_hide			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash			
+<...	gtk_widget_hide	resumed>	)
+g_object_unref			
+gdk_pixbuf_get_type			
+gtk_list_store_new			
+gtk_tree_model_filter_new			
+g_direct_hash			
+<...	gtk_tree_model_filter_new	resumed>	)
+g_object_ref			
+gtk_tree_model_filter_set_visible_func			
+gtk_container_get_children			
+g_type_interface_peek			
+g_object_ref			
+gee_abstract_collection_get_size			
+g_object_unref			
+g_signal_connect_data			
+g_direct_hash			
+<...	g_signal_connect_data	resumed>	)
+g_signal_connect_object			
+g_direct_hash			
+<...	g_signal_connect_object	resumed>	)
+g_object_ref_sink			
+g_type_interface_peek			
+g_object_ref			
+gee_abstract_collection_get_size			
+g_once_init_enter			
+g_type_register_static			
+g_quark_from_static_string			
+g_type_set_qdata			
+g_once_init_leave			
+g_object_new			
+g_type_class_peek_parent			
+g_type_class_add_private			
+g_type_check_class_cast			
+g_type_instance_get_private			
+<...	g_object_new	resumed>	)
+g_cclosure_new			
+g_bus_own_name_with_closures			
+g_direct_hash			
+---	Called	exec	
+__libc_start_main			
+strcmp			
+strstr			
+strchr			
+strlen			
+malloc			
+memcpy			
+strcmp			
+getenv			
+XOpenDisplay			
+XSetIOErrorHandler			
+getuid			
+getpwuid			
+strlen			
+malloc			
+memcpy			
+strlen			
+malloc			
+stpcpy			
+strcpy			
+XInternAtom			
+free			
+XGetSelectionOwner			
+XGetWindowProperty			
+strlen			
+malloc			
+memcpy			
+XFree			
+XGetWindowProperty			
+XFree			
+write			
+fflush			
+close			
+exit			
++++	exited		
+---	SIGCHLD		
+g_direct_hash			
+<...	g_bus_own_name_with_closures	resumed>	)
+gtk_widget_show			
+g_direct_hash			
+g_cclosure_marshal_VOID__VOID			
+g_direct_hash
