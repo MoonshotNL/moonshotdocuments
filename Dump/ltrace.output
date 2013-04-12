@@ -1,0 +1,604 @@
+[pid 5007] __libc_start_main
+[pid 5007] g_type_init
+[pid 5007] g_getenv
+[pid 5007] gtk_init
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_init resumed> )                                                         = 1
+[pid 5007] bindtextdomain
+[pid 5007] bind_textdomain_codeset
+[pid 5007] textdomain
+[pid 5007] g_once_init_enter
+[pid 5007] g_type_fundamental_next
+[pid 5007] g_type_register_fundamental
+[pid 5007] g_once_init_leave
+[pid 5007] g_type_create_instance
+[pid 5007] g_type_class_peek_parent
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_type_class_add_private
+[pid 5007] g_type_instance_get_private
+[pid 5007] <... g_type_create_instance resumed> )                                           = 0x931f6a0
+[pid 5007] g_once_init_enter
+[pid 5007] g_type_register_static
+[pid 5007] g_once_init_leave
+[pid 5007] g_object_new
+[pid 5007] g_type_class_peek_parent
+[pid 5007] g_type_class_add_private
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_signal_new
+[pid 5007] g_type_instance_get_private
+[pid 5007] <... g_object_new resumed> )                                                     = 0x92ea238
+[pid 5007] g_once_init_enter
+[pid 5007] g_type_register_static
+[pid 5007] g_once_init_enter
+[pid 5007] g_type_register_static
+[pid 5007] g_type_interface_add_prerequisite
+[pid 5007] g_once_init_leave
+[pid 5007] g_type_add_interface_static
+[pid 5007] g_once_init_leave
+[pid 5007] g_object_new
+[pid 5007] g_type_class_peek_parent
+[pid 5007] g_type_class_add_private
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_type_interface_peek_parent
+[pid 5007] g_type_instance_get_private
+[pid 5007] <... g_object_new resumed> )                                                     = 0x92ea250
+[pid 5007] g_once_init_enter
+[pid 5007] g_type_register_static
+[pid 5007] g_once_init_leave
+[pid 5007] gee_linked_list_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gee_linked_list_new resumed> )                                              = 0x9334410
+[pid 5007] gee_abstract_collection_clear
+[pid 5007] g_key_file_new
+[pid 5007] g_get_user_data_dir
+[pid 5007] g_build_filename
+[pid 5007] g_free
+[pid 5007] g_file_test
+[pid 5007] g_build_filename
+[pid 5007] g_key_file_load_from_file
+[pid 5007] fprintf
+[pid 5007] g_error_free
+[pid 5007] g_free
+[pid 5007] g_key_file_free
+[pid 5007] g_once_init_enter
+[pid 5007] gtk_window_get_type
+[pid 5007] g_type_register_static
+[pid 5007] g_once_init_leave
+[pid 5007] g_object_new
+[pid 5007] g_type_class_peek_parent
+[pid 5007] g_type_class_add_private
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_direct_hash
+[pid 5007] g_type_instance_get_private
+[pid 5007] gtk_ui_manager_new
+[pid 5007] g_direct_hash
+[pid 5007] <... g_object_new resumed> )                                                     = 0x9336000
+[pid 5007] g_object_ref
+[pid 5007] g_queue_new
+[pid 5007] g_hash_table_new_full
+[pid 5007] gtk_window_set_title
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_window_set_title resumed> )                                             = 2
+[pid 5007] gtk_window_set_position
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_window_set_position resumed> )                                          = 2
+[pid 5007] gtk_window_set_default_size
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_window_set_default_size resumed> )                                      = 0
+[pid 5007] gtk_action_group_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_action_group_new resumed> )                                             = 0x932d7b0
+[pid 5007] g_malloc0
+[pid 5007] g_realloc
+[pid 5007] gtk_action_group_add_actions
+[pid 5007] g_direct_hash
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_action_group_add_actions resumed> )                                     = 0x932b7a0
+[pid 5007] g_free
+[pid 5007] gtk_ui_manager_insert_action_group
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_ui_manager_insert_action_group resumed> )                               = 0
+[pid 5007] gtk_ui_manager_add_ui_from_string
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_ui_manager_add_ui_from_string resumed> )                                = 2
+[pid 5007] gtk_ui_manager_ensure_update
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_ui_manager_ensure_update resumed> )                                     = 0x9333c10
+[pid 5007] g_object_unref
+[pid 5007] gtk_entry_new
+[pid 5007] g_direct_hash
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_new resumed> )                                                    = 0x939c008
+[pid 5007] g_object_ref_sink
+[pid 5007] g_dgettext
+[pid 5007] gtk_widget_get_accessible
+[pid 5007] g_object_ref
+[pid 5007] atk_object_set_name
+[pid 5007] atk_object_set_description
+[pid 5007] g_object_unref
+[pid 5007] gtk_icon_size_lookup
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_icon_size_lookup resumed> )                                             = 1
+[pid 5007] gtk_icon_theme_get_default
+[pid 5007] g_object_ref
+[pid 5007] gtk_icon_theme_load_icon
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] g_free
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_icon_theme_load_icon resumed> )                                         = 0x93a7818
+[pid 5007] g_object_unref
+[pid 5007] gtk_entry_set_icon_from_pixbuf
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_icon_from_pixbuf resumed> )                                   = 2
+[pid 5007] g_object_unref
+[pid 5007] g_dgettext
+[pid 5007] gtk_entry_set_icon_tooltip_text
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_icon_tooltip_text resumed> )                                  = 2
+[pid 5007] gtk_entry_set_icon_sensitive
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_icon_sensitive resumed> )                                     = 2
+[pid 5007] gtk_icon_size_lookup
+[pid 5007] gtk_icon_theme_get_default
+[pid 5007] g_object_ref
+[pid 5007] gtk_icon_theme_load_icon
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_icon_theme_load_icon resumed> )                                         = 0x93a7850
+[pid 5007] g_object_unref
+[pid 5007] gtk_entry_set_icon_from_pixbuf
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_icon_from_pixbuf resumed> )                                   = 2
+[pid 5007] g_object_unref
+[pid 5007] g_dgettext
+[pid 5007] gtk_entry_set_icon_tooltip_text
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_icon_tooltip_text resumed> )                                  = 2
+[pid 5007] gtk_entry_set_icon_sensitive
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_icon_sensitive resumed> )                                     = 2
+[pid 5007] g_signal_connect_object
+[pid 5007] g_direct_hash
+[pid 5007] <... g_signal_connect_object resumed> )                                          = 70
+[pid 5007] g_signal_connect_object
+[pid 5007] g_direct_hash
+[pid 5007] <... g_signal_connect_object resumed> )                                          = 71
+[pid 5007] g_signal_connect_object
+[pid 5007] g_direct_hash
+[pid 5007] <... g_signal_connect_object resumed> )                                          = 72
+[pid 5007] g_once_init_enter
+[pid 5007] gtk_vbox_get_type
+[pid 5007] g_type_register_static
+[pid 5007] g_once_init_leave
+[pid 5007] g_object_new
+[pid 5007] g_type_class_peek_parent
+[pid 5007] g_type_class_add_private
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_once_init_enter
+[pid 5007] gtk_box_get_type
+[pid 5007] g_type_register_static
+[pid 5007] g_once_init_leave
+[pid 5007] g_param_spec_object
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_object_class_install_property
+[pid 5007] g_type_instance_get_private
+[pid 5007] g_direct_hash
+[pid 5007] <... g_object_new resumed> )                                                     = 0x9443880
+[pid 5007] g_object_ref
+[pid 5007] gtk_box_set_homogeneous
+[pid 5007] gtk_box_set_spacing
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_set_spacing resumed> )                                              = 0
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_viewport_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_viewport_new resumed> )                                                 = 0x94438e0
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_container_set_border_width
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_container_set_border_width resumed> )                                   = 0
+[pid 5007] gtk_viewport_set_shadow_type
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_viewport_set_shadow_type resumed> )                                     = 2
+[pid 5007] gtk_container_add
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_container_add resumed> )                                                = 0
+[pid 5007] gtk_scrolled_window_new
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_scrolled_window_new resumed> )                                          = 0x9443940
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_scrolled_window_set_policy
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_scrolled_window_set_policy resumed> )                                   = 2
+[pid 5007] gtk_scrolled_window_set_shadow_type
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_scrolled_window_set_shadow_type resumed> )                              = 2
+[pid 5007] gtk_scrolled_window_add_with_viewport
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_scrolled_window_add_with_viewport resumed> )                            = 0
+[pid 5007] gtk_vbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_vbox_new resumed> )                                                     = 0x9334468
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_widget_set_size_request
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_widget_set_size_request resumed> )                                      = 2
+[pid 5007] g_dgettext
+[pid 5007] gtk_label_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_label_new resumed> )                                                    = 0x93ad130
+[pid 5007] g_object_ref_sink
+[pid 5007] pango_font_description_new
+[pid 5007] pango_font_description_set_weight
+[pid 5007] gtk_widget_modify_font
+[pid 5007] g_object_unref
+[pid 5007] g_direct_hash
+[pid 5007] <... g_object_unref resumed> )                                                   = 23
+[pid 5007] <... gtk_widget_modify_font resumed> )                                           = 0
+[pid 5007] pango_font_description_free
+[pid 5007] gtk_misc_set_alignment
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_misc_set_alignment resumed> )                                           = 2
+[pid 5007] g_dgettext
+[pid 5007] gtk_label_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_label_new resumed> )                                                    = 0x93ad1b0
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_misc_set_alignment
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_misc_set_alignment resumed> )                                           = 2
+[pid 5007] gtk_entry_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_new resumed> )                                                    = 0x939c0f0
+[pid 5007] g_object_ref_sink
+[pid 5007] g_dgettext
+[pid 5007] gtk_label_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_label_new resumed> )                                                    = 0x93ad2b0
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_misc_set_alignment
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_misc_set_alignment resumed> )                                           = 2
+[pid 5007] gtk_entry_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_new resumed> )                                                    = 0x939c1d8
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_entry_set_invisible_char
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_invisible_char resumed> )                                     = 0
+[pid 5007] gtk_entry_set_visibility
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_entry_set_visibility resumed> )                                         = 0
+[pid 5007] g_dgettext
+[pid 5007] gtk_check_button_new_with_label
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_check_button_new_with_label resumed> )                                  = 0x93ad3b0
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_table_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_new resumed> )                                                    = 0x9443a00
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_table_set_col_spacings
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_set_col_spacings resumed> )                                       = 2
+[pid 5007] gtk_table_set_row_spacings
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_set_row_spacings resumed> )                                       = 2
+[pid 5007] gtk_table_attach_defaults
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_attach_defaults resumed> )                                        = 0
+[pid 5007] gtk_table_attach_defaults
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_attach_defaults resumed> )                                        = 0
+[pid 5007] gtk_table_attach_defaults
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_attach_defaults resumed> )                                        = 0
+[pid 5007] gtk_table_attach_defaults
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_attach_defaults resumed> )                                        = 0
+[pid 5007] gtk_table_attach_defaults
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_table_attach_defaults resumed> )                                        = 0
+[pid 5007] gtk_alignment_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_alignment_new resumed> )                                                = 0x93afe28
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_alignment_set_padding
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_alignment_set_padding resumed> )                                        = 0
+[pid 5007] gtk_container_add
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_container_add resumed> )                                                = 0
+[pid 5007] gtk_vbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_vbox_new resumed> )                                                     = 0x93344c0
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] g_dgettext
+[pid 5007] gtk_label_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_label_new resumed> )                                                    = 0x93ad4b0
+[pid 5007] g_object_ref_sink
+[pid 5007] pango_font_description_new
+[pid 5007] pango_font_description_set_weight
+[pid 5007] gtk_widget_modify_font
+[pid 5007] g_object_unref
+[pid 5007] g_direct_hash
+[pid 5007] <... g_object_unref resumed> )                                                   = 24
+[pid 5007] <... gtk_widget_modify_font resumed> )                                           = 0
+[pid 5007] pango_font_description_free
+[pid 5007] gtk_misc_set_alignment
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_misc_set_alignment resumed> )                                           = 2
+[pid 5007] gtk_alignment_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_alignment_new resumed> )                                                = 0x93afe90
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_alignment_set_padding
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_alignment_set_padding resumed> )                                        = 0
+[pid 5007] gtk_vbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_vbox_new resumed> )                                                     = 0x9334518
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_container_add
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_container_add resumed> )                                                = 0
+[pid 5007] gtk_vbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_vbox_new resumed> )                                                     = 0x9334570
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_vbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_vbox_new resumed> )                                                     = 0x93345c8
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_hbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_hbox_new resumed> )                                                     = 0x9334620
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_vbox_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_vbox_new resumed> )                                                     = 0x9334678
+[pid 5007] g_object_ref_sink
+[pid 5007] gtk_container_set_border_width
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_container_set_border_width resumed> )                                   = 0
+[pid 5007] gtk_ui_manager_get_widget
+[pid 5007] g_object_ref
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 4
+[pid 5007] gtk_box_pack_start
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_box_pack_start resumed> )                                               = 3
+[pid 5007] gtk_container_add
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_container_add resumed> )                                                = 0
+[pid 5007] gtk_widget_show_all
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_widget_show_all resumed> )                                              = 3
+[pid 5007] gtk_widget_hide
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_widget_hide resumed> )                                                  = 3
+[pid 5007] g_object_unref
+[pid 5007] gdk_pixbuf_get_type
+[pid 5007] gtk_list_store_new
+[pid 5007] gtk_tree_model_filter_new
+[pid 5007] g_direct_hash
+[pid 5007] <... gtk_tree_model_filter_new resumed> )                                        = 0x93a6740
+[pid 5007] g_object_ref
+[pid 5007] gtk_tree_model_filter_set_visible_func
+[pid 5007] gtk_container_get_children
+[pid 5007] g_type_interface_peek
+[pid 5007] g_object_ref
+[pid 5007] gee_abstract_collection_get_size
+[pid 5007] g_object_unref
+[pid 5007] g_signal_connect_data
+[pid 5007] g_direct_hash
+[pid 5007] <... g_signal_connect_data resumed> )                                            = 114
+[pid 5007] g_signal_connect_object
+[pid 5007] g_direct_hash
+[pid 5007] <... g_signal_connect_object resumed> )                                          = 115
+[pid 5007] g_object_ref_sink
+[pid 5007] g_type_interface_peek
+[pid 5007] g_object_ref
+[pid 5007] gee_abstract_collection_get_size
+[pid 5007] g_once_init_enter
+[pid 5007] g_type_register_static
+[pid 5007] g_quark_from_static_string
+[pid 5007] g_type_set_qdata
+[pid 5007] g_once_init_leave
+[pid 5007] g_object_new
+[pid 5007] g_type_class_peek_parent
+[pid 5007] g_type_class_add_private
+[pid 5007] g_type_check_class_cast
+[pid 5007] g_type_instance_get_private
+[pid 5007] <... g_object_new resumed> )                                                     = 0x944b590
+[pid 5007] g_cclosure_new
+[pid 5007] g_bus_own_name_with_closures
+[pid 5007] g_direct_hash
+[pid 5008] --- Called exec
+[pid 5008] __libc_start_main
+[pid 5008] strcmp
+[pid 5008] strstr
+[pid 5008] strchr
+[pid 5008] strlen
+[pid 5008] malloc
+[pid 5008] memcpy
+[pid 5008] strcmp
+[pid 5008] getenv
+[pid 5008] XOpenDisplay
+[pid 5008] XSetIOErrorHandler
+[pid 5008] getuid
+[pid 5008] getpwuid
+[pid 5008] strlen
+[pid 5008] malloc
+[pid 5008] memcpy
+[pid 5008] strlen
+[pid 5008] malloc
+[pid 5008] stpcpy
+[pid 5008] strcpy
+[pid 5008] XInternAtom
+[pid 5008] free
+[pid 5008] XGetSelectionOwner
+[pid 5008] XGetWindowProperty
+[pid 5008] strlen
+[pid 5008] malloc
+[pid 5008] memcpy
+[pid 5008] XFree
+[pid 5008] XGetWindowProperty
+[pid 5008] XFree
+[pid 5008] write
+[pid 5008] fflush
+[pid 5008] close
+[pid 5008] exit
+[pid 5008] +++ exited 
+[pid 5007] --- SIGCHLD 
+[pid 5007] g_direct_hash
+[pid 5007] <... g_bus_own_name_with_closures resumed> )                                     = 1
+[pid 5007] gtk_widget_show
+[pid 5007] g_direct_hash
+[pid 5007] g_cclosure_marshal_VOID__VOID
+[pid 5007] g_direct_hash
