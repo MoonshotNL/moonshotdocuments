@@ -1,0 +1,88 @@
+auth2-gss.c file for moonshot differs from the normal source file (openSSH 5.9p1)
+
+----
+
+NEW MOONSHOT FILE (new part)
+
+----
+
+userauth_gsskeyex(Authctxt *authctxt)
+{
+        int authenticated = 0;
+        Buffer b;
+        gss_buffer_desc mic, gssbuf;
+        u_int len;
+
+        mic.value = packet_get_string(&len);
+        mic.length = len;
+
+        packet_check_eom();
+
+        ssh_gssapi_buildmic(&b, authctxt->user, authctxt->service,
+            "gssapi-keyex");
+
+        gssbuf.value = buffer_ptr(&b);
+        gssbuf.length = buffer_len(&b);
+
+        gssapi_set_username(authctxt);
+
+        /* gss_kex_context is NULL with privsep, so we can't check it here */
+        if (!GSS_ERROR(PRIVSEP(ssh_gssapi_checkmic(gss_kex_context, 
+            &gssbuf, &mic))))
+                authenticated = PRIVSEP(ssh_gssapi_userok(authctxt->user,
+                    authctxt->pw));
+        
+        buffer_free(&b);
+        xfree(mic.value);
+
+        return (authenticated);
+}
+
+/*
+ * We only support those mechanisms that we know about (ie ones that we know
+ * how to check local user kuserok and the like)
+ */
+
+----
+
+gssapi_set_username(Authctxt *authctxt)
+{
+    char *lname = NULL;
+
+    if ((authctxt->user == NULL) || (authctxt->user[0] == '\0')) {
+        PRIVSEP(ssh_gssapi_localname(&lname));
+        if (lname && lname[0] != '\0') {
+            if (authctxt->user) xfree(authctxt->user);
+            authctxt->user = lname;
+            debug("set username to %s from gssapi context", lname);
+            authctxt->pw = PRIVSEP(getpwnamallow(authctxt->user));
+            if (authctxt->pw) {
+                authctxt->valid = 1;
+#ifdef USE_PAM
+                if (options.use_pam)
+                    PRIVSEP(start_pam(authctxt));
+#endif
+            }
+        } else {
+            debug("failed to set username from gssapi context");
+            packet_send_debug("failed to set username from gssapi context");
+        }
+    }
+}
+
+/*
+ * This is called when the client thinks we've completed authentication.
+ * It should only be enabled in the dispatch handler by the function above,
+ * which only enables it once the GSSAPI exchange is complete.
+ */
+
+----
+
+Authmethod method_gsskeyex = {
+        "gssapi-keyex",
+        userauth_gsskeyex,
+        &options.gss_authentication
+};
+
+----
+

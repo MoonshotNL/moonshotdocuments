@@ -1,0 +1,21 @@
+Research Rapport:
+
+1) Inleiding
+2) Methode
+3) Resultaten
+4) Conslusie / Discussie
+
+-----
+
+Afgekeurde voorstellen
+Agenda gesprek
+Onderzoeksvraag samenstellen voor Research Rapport
+Producten
+Research Report
+
+-----
+
+"Met welke methode is het mogelijk om een veilige federated service te creeëren, waarbij het mogelijk is om verbinding te maken met bijvoorbeeld een SSH-server, waarbij de privacy van de credentials van de gebruiker gewaarborgd is?"
+
+-----
+

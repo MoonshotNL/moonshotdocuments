@@ -1,0 +1,595 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Consolas-Bold;\f2\fnil\fcharset0 Consolas;
+\f3\fnil\fcharset0 Consolas-BoldItalic;\f4\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red135\green135\blue135;\red38\green38\blue38;\red135\green136\blue117;
+}
+\paperw11900\paperh16840\margl1440\margr1440\margb1417\margt1417\vieww12200\viewh17140\viewkind1
+\deftab720
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\f0\fs24 \cf0 Found:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\i\b \cf0 mod_auth_kerb
+\i0\b0 \
+\
+-----\
+MAKEFILE\
+-----\
+\
+APXS = @APXS@\
+GSS_CPPFLAGS = @GSS_CPPFLAGS@\
+GSS_LDFLAGS = @GSS_LDFLAGS@ @LIBS@\
+SPNEGO_SRCS = @SPNEGO_SRCS@\
+\
+CPPFLAGS = -I. -Ispnegokrb5 $(GSS_CPPFLAGS) $(DEFS)\
+LDFLAGS = $(GSS_LDFLAGS)\
+CFLAGS =\
+\
+SRCS = mod_auth_gssapi.c gss.c $(SPNEGO_SRCS)\
+\
+all: mod_auth_gssapi.la\
+\
+mod_auth_gssapi.la: $(SRCS)\
+        ./apxs.sh "$\{CPPFLAGS\}" "$\{LDFLAGS\}" "$\{SRCS\}" "$\{APXS\} -c"\
+\
+install: mod_auth_gssapi.la\
+        ./apxs.sh "$\{CPPFLAGS\}" "$\{LDFLAGS\}" $^ "$\{APXS\} -i -A -n auth_gssapi"\
+\
+clean:\
+        for i in . spnegokrb5; do \\\
+                (cd $$i && $(RM) *.o *.so *.a *.la *.lo *.slo); \\\
+                $(RM) -rf $$i/.libs; \\\
+        done\
+\
+distclean: clean\
+        $(RM) config.h config.status Makefile config.log\
+        $(RM) -rf autom4te.cache\
+\
+.PHONY: all install clean distclean\
+\
+-----\
+\
+
+\i\b mod_auth_gssapi.c
+\i0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\b0 \cf0 -----\
+\
+/*\
+ * Copyright (c) 2010 CESNET\
+ * All rights reserved.\
+ *\
+ * Redistribution and use in source and binary forms, with or without\
+ * modification, are permitted provided that the following conditions are met:\
+ *\
+ * 1. Redistributions of source code must retain the above copyright notice,\
+ *    this list of conditions and the following disclaimer.\
+ *\
+ * 2. Redistributions in binary form must reproduce the above copyright\
+ *    notice, this list of conditions and the following disclaimer in the\
+ *    documentation and/or other materials provided with the distribution.\
+ *\
+ * 3. Neither the name of CESNET nor the names of its contributors may\
+ *    be used to endorse or promote products derived from this software\
+ *    without specific prior written permission.\
+ *\
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"\
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\
+ * POSSIBILITY OF SUCH DAMAGE.\
+ */\
+\
+#include "mod_auth_gssapi.h"\
+\
+module AP_MODULE_DECLARE_DATA auth_gssapi_module;\
+\
+#define command(name, func, var, type, usage)           \\\
+  AP_INIT_ ## type (name, (void*) func,                 \\\
+        (void*)APR_OFFSETOF(gss_auth_config, var),      \\\
+        OR_AUTHCFG | RSRC_CONF, usage)\
+\
+static const command_rec gss_config_cmds[] = \{\
+    command("GSSServiceName", ap_set_string_slot, service_name,\
+            TAKE1, "Service name used for Apache authentication."),\
+\
+    command("GSSKrb5Keytab", ap_set_string_slot, krb5_keytab,\
+            TAKE1, "Location of Kerberos V5 keytab file."),\
+\
+    \{ NULL \}\
+\};\
+\
+static void *\
+gss_config_dir_create(apr_pool_t *p, char *d)\
+\{\
+    gss_auth_config *conf;\
+\
+    conf = (gss_auth_config *) apr_pcalloc(p, sizeof(*conf));\
+    return conf;\
+\}\
+\
+void\
+gss_log(const char *file, int line, int level, int status,\
+        const request_rec *r, const char *fmt, ...)\
+\{\
+    char errstr[1024];\
+    va_list ap;\
+\
+    va_start(ap, fmt);\
+    vsnprintf(errstr, sizeof(errstr), fmt, ap);\
+    va_end(ap);\
+   \
+    ap_log_rerror(file, line, level | APLOG_NOERRNO, status, r, "%s", errstr);\
+\}\
+\
+static void\
+set_http_headers(request_rec *r, const gss_auth_config *conf,\
+      		 char *negotiate_ret_value)\
+\{\
+    char *negoauth_param;\
+    const char *header_name = (r->proxyreq == PROXYREQ_PROXY) ?\
+        "Proxy-Authenticate" : "WWW-Authenticate";\
+\
+    if (negotiate_ret_value == NULL)\
+	return;\
+\
+    negoauth_param = (*negotiate_ret_value == '\\0') ? "GSSAPI" :\
+        apr_pstrcat(r->pool, "GSSAPI ", negotiate_ret_value, NULL);\
+    apr_table_add(r->err_headers_out, header_name, negoauth_param);\
+\}\
+\
+static apr_status_t\
+cleanup_conn_ctx(void *data)\
+\{\
+    gss_conn_ctx ctx = (gss_conn_ctx) data;\
+    OM_uint32 minor_status;\
+\
+    if (ctx && ctx->context != GSS_C_NO_CONTEXT)\
+	gss_delete_sec_context(&minor_status, &ctx->context, GSS_C_NO_BUFFER);\
+\
+    return APR_SUCCESS;\
+\}\
+\
+static gss_conn_ctx\
+gss_get_conn_ctx(request_rec *r)\
+\{\
+    char key[1024];\
+    gss_conn_ctx ctx = NULL;\
+\
+    snprintf(key, sizeof(key), "mod_auth_gssapi:conn_ctx");\
+    apr_pool_userdata_get((void **)&ctx, key, r->connection->pool);\
+    /* XXX LOG */\
+    if (ctx == NULL) \{\
+	ctx = (gss_conn_ctx) apr_palloc(r->connection->pool, sizeof(*ctx));\
+	if (ctx == NULL)\
+	    return NULL;\
+	ctx->context = GSS_C_NO_CONTEXT;\
+	ctx->state = GSS_CTX_EMPTY;\
+	ctx->user = NULL;\
+	apr_pool_userdata_set(ctx, key, cleanup_conn_ctx, r->connection->pool);\
+    \}\
+    return ctx;\
+\}\
+\
+static int\
+gss_authenticate_user(request_rec *r)\
+\{\
+    gss_auth_config *conf = \
+        (gss_auth_config *) ap_get_module_config(r->per_dir_config,\
+						&auth_gssapi_module);\
+    const char *auth_line = NULL;\
+    const char *type = NULL;\
+    char *auth_type = NULL;\
+    char *negotiate_ret_value = NULL;\
+    gss_conn_ctx conn_ctx = NULL;\
+    int ret;\
+\
+    gss_log(APLOG_MARK, APLOG_DEBUG, 0, r, "Entering GSSAPI authentication");\
+   \
+    /* get the type specified in Apache configuration */\
+    type = ap_auth_type(r);\
+    if (type == NULL || strcmp(type, "GSSAPI") != 0) \{\
+        gss_log(APLOG_MARK, APLOG_DEBUG, 0, r,\
+		"AuthType '%s' is not for us, bailing out",\
+		(type) ? type : "(NULL)");\
+\
+        return DECLINED;\
+    \}\
+\
+    /* get what the user sent us in the HTTP header */\
+    auth_line = apr_table_get(r->headers_in, (r->proxyreq == PROXYREQ_PROXY)\
+ 	                                    ? "Proxy-Authorization"\
+					    : "Authorization");\
+    if (auth_line == NULL) \{\
+        gss_log(APLOG_MARK, APLOG_DEBUG, 0, r,\
+		"Client hasn't sent any authentication data, giving up");\
+        set_http_headers(r, conf, "\\0");\
+        return HTTP_UNAUTHORIZED;\
+    \}\
+\
+    auth_type = ap_getword_white(r->pool, &auth_line);\
+    if (strcasecmp(auth_type, "GSSAPI") != 0) \{\
+        gss_log(APLOG_MARK, APLOG_DEBUG, 0, r,\
+		"Unsupported authentication type (%s) requested by client",\
+		(auth_type) ? auth_type : "(NULL)");\
+        set_http_headers(r, conf, "\\0");\
+        return HTTP_UNAUTHORIZED;\
+    \}\
+\
+    conn_ctx = gss_get_conn_ctx(r);\
+    if (conn_ctx == NULL) \{\
+	gss_log(APLOG_MARK, APLOG_ERR, 0, r,\
+		"Failed to create internal context: probably not enough memory");\
+	return HTTP_INTERNAL_SERVER_ERROR;\
+    \}\
+\
+    /* optimizing hack */\
+    if (conn_ctx->state == GSS_CTX_ESTABLISHED && auth_line == NULL) \{\
+	r->user = apr_pstrdup(r->pool, conn_ctx->user);\
+	r->ap_auth_type = "GSSAPI";\
+	return OK;\
+    \}\
+\
+    /* XXXX subrequests ignored, only successful accesses taken into account! */\
+    if (!ap_is_initial_req(r) && conn_ctx->state == GSS_CTX_ESTABLISHED) \{\
+	r->user = apr_pstrdup(r->pool, conn_ctx->user);\
+	r->ap_auth_type = "GSSAPI";\
+	return OK;\
+    \}\
+\
+    ret = gss_authenticate(r, conf, conn_ctx,\
+	                   auth_line, &negotiate_ret_value);\
+    if (ret == HTTP_UNAUTHORIZED || ret == OK) \{\
+        /* LOG?? */\
+        set_http_headers(r, conf, negotiate_ret_value);\
+    \}\
+\
+    if (ret == OK) \{\
+	r->user = apr_pstrdup(r->pool, conn_ctx->user);\
+	r->ap_auth_type = "GSSAPI";\
+    \}\
+\
+    /* debug LOG ??? */\
+\
+    return ret;\
+\}\
+\
+static void\
+gss_register_hooks(apr_pool_t *p)\
+\{\
+    ap_hook_check_user_id(gss_authenticate_user, NULL, NULL, APR_HOOK_MIDDLE);\
+\}\
+\
+module AP_MODULE_DECLARE_DATA auth_gssapi_module = \{\
+    STANDARD20_MODULE_STUFF,\
+    gss_config_dir_create,\
+    NULL,\
+    NULL,\
+    NULL,\
+    gss_config_cmds,\
+    gss_register_hooks\
+\};\
+\
+-----\
+\
+Created by CESNET (Czech Network for Research / Research for Network) 2010\
+\
+------\
+\
+AUTH2-GSS.C\
+\
+-----\
+gssapi_set_username:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\i \cf0 "set username %s from gssapi context", lname);\
+\
+authctxt->pw = PRIVSEP(getpwnamallow(authctxt->user));\
+if (authctxt->pw) \{\
+	authctxt->valid = 1;\
+#ifdef USE_PAM\
+		if (options.use_pam)\
+			PRIVSEP(start_pam(authctxt));\
+#endif\
+\
+/* PAM, PAMPAMPAM, PAMPAM - PAM, PAM PAM PAM */\
+\
+------\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\b \cf0 ssh-gss.h\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\b0 \cf0 ------\
+\
+MIT Kerberos is not there anymore:\
+\
+\pard\pardeftab720\ri0\sl320
+
+\f1\i0\b \cf2 #ifdef KRB5
+\f2\b0 \cf3 \
+
+\f1\b \cf2 # ifndef HEIMDAL
+\f2\b0 \cf3 \
+
+\f1\b \cf2 #  ifdef HAVE_GSSAPI_GENERIC_H
+\f2\b0 \cf3 \
+
+\f1\b \cf2 #   include <gssapi_generic.h>
+\f2\b0 \cf3 \
+
+\f1\b \cf2 #  elif defined(HAVE_GSSAPI_GSSAPI_GENERIC_H)
+\f2\b0 \cf3 \
+
+\f1\b \cf2 #   include <gssapi/gssapi_generic.h>
+\f2\b0 \cf3 \
+
+\f1\b \cf2 #  endif
+\f2\b0 \cf3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri0
+
+\f0\i \cf0 \
+\pard\pardeftab720\ri0\sl320
+\cf4 /* MIT Kerberos doesn't seem to define GSS_NT_HOSTBASED_SERVICE */
+\i0 \cf3 \
+\
+\pard\pardeftab720\ri0\sl320
+
+\b \cf2 #ifndef GSS_C_NT_HOSTBASED_SERVICE
+\b0 \cf3 \
+
+\b \cf2 #define GSS_C_NT_HOSTBASED_SERVICE gss_nt_service_name
+\b0 \cf3 \
+
+\b \cf2 #endif 
+\i\b0 \cf4 /* GSS_C_NT_... */
+\i0 \cf3 \
+
+\b \cf2 #endif 
+\i\b0 \cf4 /* !HEIMDAL */
+\i0 \cf3 \
+
+\b \cf2 #endif 
+\i\b0 \cf4 /* KRB5 */
+\i0 \cf3 \
+\
+------\
+\
+\pard\pardeftab720\ri0\sl320
+
+\b \cf3 Dikgedrukt
+\b0 , wat is veranderd/bijgekomen; 
+\i\b cursief/dikgedrukt
+\i0\b0 : verdwenen:\
+\
+------\
+...\
+
+\b #ifdef HAVE_GSSAPI_EXT_H\
+#include <gssapi_ext.h>\
+#elif defined(HAVE_GSSAPI_GSSAPI_EXT_H)\
+#include <gssapi/gssapi_ext.h>\
+#endif
+\b0 \
+\
+
+\b #define SSH2_MSG_KEXGSS_INIT                            30\
+#define SSH2_MSG_KEXGSS_CONTINUE                        31\
+#define SSH2_MSG_KEXGSS_COMPLETE                        32\
+#define SSH2_MSG_KEXGSS_HOSTKEY                         33\
+#define SSH2_MSG_KEXGSS_ERROR                           34\
+#define SSH2_MSG_KEXGSS_GROUPREQ			40\
+#define SSH2_MSG_KEXGSS_GROUP				41\
+#define KEX_GSS_GRP1_SHA1_ID				"gss-group1-sha1-"\
+#define KEX_GSS_GRP14_SHA1_ID				"gss-group14-sha1-"\
+#define KEX_GSS_GEX_SHA1_ID				"gss-gex-sha1-"\
+\
+\pard\pardeftab720\ri0\sl320
+
+\b0 \cf3 typedef struct \{\
+	char *filename;\
+	char *envvar;\
+	char *envval;\
+	
+\b struct passwd *owner;
+\b0 \
+	void *data;\
+\} ssh_gssapi_ccache;\
+\
+typedef struct \{\
+	gss_buffer_desc displayname;\
+	gss_buffer_desc exportedname;\
+	gss_cred_id_t creds;\
+	gss_name_t name;\
+\pard\pardeftab720\ri0\sl320
+
+\f1\b \cf3 	
+\f3\i struct ssh_gssapi_mech_struct *mech;
+\f0\i0\b0 \
+	ssh_gssapi_ccache store;\
+\pard\pardeftab720\ri0\sl320
+
+\b \cf3 	int used;\
+	int updated;
+\b0 \
+\} ssh_gssapi_client;\
+\
+typedef struct \{\
+	OM_uint32	major; /* both */\
+	OM_uint32	minor; /* both */\
+	gss_ctx_id_t	context; /* both */\
+	gss_name_t	name; /* both */\
+	gss_OID		oid; /* client */\
+	gss_cred_id_t	creds; /* server */\
+	gss_name_t	client; /* server */\
+	gss_cred_id_t	client_creds; 
+\i\b /* both */  
+\i0 /* server */
+\b0 \
+\} Gssctxt;\
+\
+\pard\pardeftab720\ri0\sl320
+
+\f3\i\b \cf3 extern ssh_gssapi_mech *supported_mechs[];
+\f0\i0\b0 \
+extern Gssctxt *gss_kex_context;\
+\
+int  ssh_gssapi_check_oid(Gssctxt *, void *, size_t);\
+void ssh_gssapi_set_oid_data(Gssctxt *, void *, size_t);\
+void ssh_gssapi_set_oid(Gssctxt *, gss_OID);\
+void ssh_gssapi_supported_oids(gss_OID_set *);\
+\pard\pardeftab720\ri0\sl320
+
+\i\b \cf3 ssh_gssapi_mech *ssh_gssapi_get_ctype(Gssctxt *);
+\i0\b0 \
+\
+OM_uint32 ssh_gssapi_import_name(Gssctxt *, const char *);\
+OM_uint32 ssh_gssapi_init_ctx(Gssctxt *, int,\
+    gss_buffer_desc *, gss_buffer_desc *, OM_uint32 *);\
+OM_uint32 ssh_gssapi_accept_ctx(Gssctxt *,\
+    gss_buffer_desc *, gss_buffer_desc *, OM_uint32 *);\
+OM_uint32 ssh_gssapi_getclient(Gssctxt *, ssh_gssapi_client *);\
+void ssh_gssapi_error(Gssctxt *);\
+char *ssh_gssapi_last_error(Gssctxt *, OM_uint32 *, OM_uint32 *);\
+void ssh_gssapi_build_ctx(Gssctxt **);\
+void ssh_gssapi_delete_ctx(Gssctxt **);\
+OM_uint32 ssh_gssapi_sign(Gssctxt *, gss_buffer_t, gss_buffer_t);\
+void ssh_gssapi_buildmic(Buffer *, const char *, const char *, const char *);\
+int ssh_gssapi_check_mechanism(Gssctxt **, gss_OID, const char *, const char *);\
+\pard\pardeftab720\ri0\sl320
+
+\b \cf3 OM_uint32 ssh_gssapi_client_identity(Gssctxt *, const char *);\
+int ssh_gssapi_credentials_updated(Gssctxt *);
+\b0 \
+\
+/* In the server */\
+
+\b typedef int ssh_gssapi_check_fn(Gssctxt **, gss_OID, const char *, \
+    const char *);\
+char *ssh_gssapi_client_mechanisms(const char *, const char *);\
+char *ssh_gssapi_kex_mechs(gss_OID_set, ssh_gssapi_check_fn *, const char *,\
+    const char *);\
+gss_OID ssh_gssapi_id_kex(Gssctxt *, char *, int);\
+int ssh_gssapi_server_check_mech(Gssctxt **,gss_OID, const char *, \
+    const char *);
+\b0 \
+OM_uint32 ssh_gssapi_server_ctx(Gssctxt **, gss_OID);\
+int ssh_gssapi_userok(char *name, 
+\b struct passwd *
+\b0 );\
+
+\b OM_uint32 ssh_gssapi_localname(char **name);
+\b0 \
+OM_uint32 ssh_gssapi_checkmic(Gssctxt *, gss_buffer_t, gss_buffer_t);\
+void ssh_gssapi_do_child(char ***, u_int *);\
+void ssh_gssapi_cleanup_creds(void);\
+void ssh_gssapi_storecreds(void);\
+\
+\
+moonshot/moonshot/libeap/radiusexample/radius_example.c\
+\
+moonshot/moonshot/libeap/eap_example (certificates (.pem))\
+\pard\pardeftab720\ri0\sl320
+
+\f4\fs22 \cf0 \page \pard\pardeftab720\ri0\sl320
+
+\i\b \cf0 Vergelijking openssh root en moonshot openssh root\
+\pard\pardeftab720\ri0\sl320
+
+\i0\b0 \cf0 \
+auth2.c\
+\pard\pardeftab720\ri0\sl320
+
+\b \cf0 auth2-gss.c
+\b0 \
+authfile.c (minder)\
+ChangeLog\
+ChangeLog.gssapi (toegevoegd)\
+clientloop.c (minder)\
+configure\
+configure.ac (minder)\
+entropy.c (minder)\
+gss-genr.c\
+gss-serv-krb5.c (verwijderd)\
+kex.c\
+kex.h\
+kexgssc.c (toegevoegd)\
+kexgsss.c\
+log.c\
+Makefile.in\
+monitor.h\
+\pard\pardeftab720\ri0\sl320
+\cf0 \ul \ulc0 mux.c\ulnone  (minder)\
+PROTOCOL.mux (minder)\
+sandbox-darwin.c (verwijderd)\
+sandbox-null.c (verwijderd)\
+sandbox-rlimit.c (verwijderd)\
+sandbox-systrace.c (verwijderd)\
+servconf.c\
+servconf.h (minder)\
+sftp.1 (minder)\
+ssh.0 (minder)\
+ssh.c (minder)\
+ssh_config.0 (minder)\
+ssh_prng_cmds.in (toegevoegd)\
+ssh-agent.c (minder)\
+sshconnect.c (minder)\
+sshconnect2.c\
+sshd.c\
+\pard\pardeftab720\ri0\sl320
+
+\b \cf0 ssh-gss.h
+\b0 \
+ssh-keygen.0 (minder)\
+ssh-keygen.1 (minder)\
+ssh-keygen.c (minder)\
+ssh-rand-helper.0 (toegevoegd)\
+ssh-rand-helper.8 (toegevoegd)\
+ssh-rand-helper.c (toegevoegd)\
+ssh-sandbox.h (verwijderd)\
+WARNING.RNG (Toegevoegd)\
+\
+\pard\pardeftab720\ri0\sl320
+
+\i\b \cf0 openssh/contrib/cygwin
+\b0 \
+\pard\pardeftab720\ri0\sl320
+
+\i0 \cf0 ssh-host-config (minder)\
+ssh-user-config\
+openssh/contrib/redhat\
+sshd.init\
+\
+\pard\pardeftab720\ri0\sl320
+
+\i\b \cf0 openssh/contrib/suse\
+\pard\pardeftab720\ri0\sl320
+
+\i0\b0 \cf0 openssh.spec\
+\
+\pard\pardeftab720\ri0\sl320
+
+\i\b \cf0 openssh/openbsd-compat\
+\pard\pardeftab720\ri0\sl320
+
+\i0\b0 \cf0 bsd-cygwin_util.c\
+\
+\pard\pardeftab720\ri0\sl320
+
+\i\b \cf0 openssh/regress\
+\pard\pardeftab720\ri0\sl320
+
+\i0\b0 \cf0 cfgmatch.sh\
+}

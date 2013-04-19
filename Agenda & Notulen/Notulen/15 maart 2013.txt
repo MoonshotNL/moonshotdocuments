@@ -1,0 +1,114 @@
+Notulen 15 maart 2013
+
+	Presentatie Sebastiaan / Wouter
+
+Vraag over encryptie (EAPTTLS) ( … ):
+	Waar zijn de gebruikersgegevens aanwezig?
+		Client / RADIUS
+	Eventueel B-channel opzetten? (Oscar)
+	Proxies zijn ook niet te vertrouwen
+		Gebruiker: admin@nikhef <-- geen crypto / niet gesigned
+
+Kerberos ziet er heel erg interessant uit:
+	Cross-realm…
+		Elk client device een pad genereren naar KDC (voor trust)… Grote uitdaging
+	Kerberos is heel erg DNS-based…
+		Welke KDC moet je hebben?
+		Er is geen gedefinieerd pad...
+
+	Huidige infra (niet-kerberos-based) --> heel zware implementatie
+
+	PKIINIT => cert-based, niet user --> plain-certificates
+
+	Federatief niet handig te implementeren (end-to-end trusts)
+		Er zit een stap tussen (bij het path)…
+
+
+
+----------
+
+***SMINE***?
+
+X509
+	Iedereen geen crypt attribute sturen
+	EAP/TTLS tunnel end-to-end
+	SSH --> "UvA" (x509: public key, …)
+		Je kunt je eigen attributen meesturen (aan beide kanten)
+			Attributen in de OUTER tunnel
+				Extra attributen kunnen eventueel ook in inner-tunnel
+
+	EAP-over-LAN	(EAP-TTLS met daarin EAP-PAP/CHAPv2)
+
+	Met certificate kun je encrypted messages versturen
+	AES key encrypt met certs (group cert holders) in 1 message
+
+	Schaalheidsprobleem: je kunt niet elke SSHd server vertrouwen…
+		SSHd <--(>)  SURF is 'root' <--> UvA
+
+	Wachtwoord wordt pas afgegeven aan het einde v/d tunnel (EAP-TTLS)
+		EAP end-to-end (niets bijzonders / niet federatief)
+		SSHd weet verder niets, "hij is alleen geauthentiseerd"
+
+Vb. Moonshot uit GB (SSH / Putty met EAP/SSH)
+
+	Vorige team had zelfs het password aan het einde… Vorige keer: features --> nu: security / verbeteringen
+
+	De Britten konden niet zien welke gebruiker nu uiteindelijk moet worden ingelogd…
+
+	SSHd beheerder moet weten wie er ingelogd is (IDs die te herleiden zijn naar accounts d.m.v. security officers of <gebruiker>@Nikhef)
+
+	SSHd heeft private key, <-- public key (request + x509)
+
+	User moet in control zijn over de attributen die meegestuurd worden
+		"Profile"
+
+SURF attributen
+	Wordt toegevoegd (outer tunnel) met extra certificate, maar je doet er in 1ste instantie niets mee…
+	if (SURF heeft extra cert meegegeven)
+		Lees dan viavia de attributen uit (als de gebruiker dat wilt)
+
+	Surf mag niet weten dat het om gebruiker ## gaat.
+
+	PAM is redelijk flexibel, SSH heeft een hoop 'gesloopt'.
+	GSS fixen met SSH (payload allemaal Kerberos…)
+	PAM-RADIUS is crap (bouwt zelf een tunnel, de way-to-go is alleen tunnelen om attributen eruit te vissen…)
+
+		EAP stuk moet anders… Er moet een path komen voor extra com.channel om extra attributes af te kunnen afvangen…
+
+Project opdelen in 'de lastige stukken'.
+	Username bug (hang up)
+	Socket die binnenkomt -> doorpushen (SSHd mag het niet zien)
+
+	TTLS gaat over EAP, SSH doet daar niets mee…
+
+Uiteindelijke doel: Research Rapport met goedwerkende DEMO.
+
+GSS < -- > EAP
+
+	Aanname: GSS -> SSH ('Magic') --> RADIUS --> …
+
+carrier = GSS, volgende carrier = RADIUS
+
+1) Wat kan ik doen als GSS client kant?
+	Met welke SSH client? open-ssh makkelijkste startpunt
+2) Hoe initieer ik GSS (in code)? ** of SASSL **
+3) Kan ik hierdoor iets 'trappen'
+4) EAP-TTLS session: welke codeopties hebben we? (zie wpa-supplicant)
+5) Kijk naar moonshot voorbeelden (UK: ~2011)
+	Demonstratie met GSS / Putty?
+	PAM gebruiken?
+		SSH daemon : interactie GSS : succesvol / faal: wat doet ie?
+		Krijg ik alle informatie weer in PAM?
+		Aanname: GSS voor PAM…
+
+		Groups ook daadwerkelijk krijgen………
+
+WELKE ONDERZOEKSDELEN ZITTEN ERIN
+	MOTIVATIES
+
+Misschien zonder GSS mogelijk………… maar……
+GSS is TOT SSHd --> daarna certs
+
+daemon / client code doorspitten...
+
+gdb --args <exec>

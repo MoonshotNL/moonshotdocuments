@@ -1,0 +1,34 @@
+sshd.c:int main
+1. Store progname
+2. Prepare for later setproctitle emulation
+3. Sanitise pipe fds (open or /dev/null)
+4. Initialize the server options
+5. Add all OpenSSL algorithms
+6. Load the server config options from /etc/ssh/sshd_config
+7. Fill not-yet specified options with the default options
+8. Set default channel AF (IPv4 or IPv6)
+9. Store privilege seperation user for later use if required (????)
+10. Create room for the host keys
+11. Load the host keys into the "sensitive_data" struct
+12. Check if host keys for the specified SSH protocol were present (exit if not)
+13. If using SSHv1, do additional checks on keys and options
+14. If using privilege seperation (default), prepare chroot & uid settings
+15. Clear out any inherited groups we've inherited
+16. Prepare the -R argument in rexec_argv for the child processes
+17. Create an umask that disallows group and world write
+18. Initialize the log
+19. Disconnect from terminal and fork (daemonize). Original process exits
+20. Reinitialize the log
+21. Initialize the RNG (arc4random_stir())
+22. Chdir to "/"
+23. Ignore SIGPIPE signals
+24. Set up listening and call sshd.c:server_accept_loop(int *sock_in, int *newsock, int *config_s)
+
+sshd.c:static void server_accept_loop
+1. Set up fds for accepting connections
+2. Listen to connections and do checks each loop
+3. (debugmode: don't fork and stop listening for incomming connections)
+3. Fork for the incoming connection, close the listening fds in the child and handle the connection. Go back to main to handle the child connection (the listening daemon never returns there)
+
+sshd.c:int main
+1. 

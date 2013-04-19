@@ -1,0 +1,6 @@
+http://www.xenocafe.com/tutorials/linux/centos/openssl/self_signed_certificates/index.php
+http://dev.antoinesolutions.com/openssl/certificate-authority
+http://www.imacat.idv.tw/tech/sslcerts.html
+http://www.davidpashley.com/articles/cert-authority.html
+http://fusesource.com/docs/broker/5.3/security/SSL-UseCerts.html
+http://www.ipsec-howto.org/x595.html

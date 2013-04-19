@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
+{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs24 \cf0 /etc/ssh/sshd_config line 81: Unsupported option GSSAPIAuthentication\
+/etc/ssh/sshd_config line 83: Unsupported option GSSAPICleanupCredentials\
+debug1: sshd version OpenSSH_6.1p1\
+debug1: read PEM private key done: type RSA\
+debug1: private host key: #0 type 1 RSA\
+debug1: read PEM private key done: type DSA\
+debug1: private host key: #1 type 2 DSA\
+debug1: rexec_argv[0]='/root/openssh-6.1p1/sshd'\
+debug1: rexec_argv[1]='-d'\
+Set /proc/self/oom_score_adj from 0 to -1000\
+debug1: Bind to port 22 on 0.0.0.0.\
+Server listening on 0.0.0.0 port 22.\
+debug1: Bind to port 22 on ::.\
+Server listening on :: port 22.\
+debug1: Server will not fork when running in debugging mode.\
+debug1: rexec start in 5 out 5 newsock 5 pipe -1 sock 8\
+debug1: inetd sockets after dupping: 3, 3\
+Connection from 192.168.56.1 port 53344\
+debug1: Client protocol version 2.0; client software version OpenSSH_5.9\
+debug1: match: OpenSSH_5.9 pat OpenSSH_5*\
+debug1: Enabling compatibility mode for protocol 2.0\
+debug1: Local version string SSH-2.0-OpenSSH_6.1\
+debug1: permanently_set_uid: 74/74 [preauth]\
+debug1: list_hostkey_types: ssh-rsa,ssh-dss [preauth]\
+debug1: SSH2_MSG_KEXINIT sent [preauth]\
+debug1: SSH2_MSG_KEXINIT received [preauth]\
+debug1: kex: client->server aes128-ctr hmac-md5 none [preauth]\
+debug1: kex: server->client aes128-ctr hmac-md5 none [preauth]\
+debug1: SSH2_MSG_KEX_DH_GEX_REQUEST received [preauth]\
+debug1: SSH2_MSG_KEX_DH_GEX_GROUP sent [preauth]\
+debug1: expecting SSH2_MSG_KEX_DH_GEX_INIT [preauth]\
+debug1: SSH2_MSG_KEX_DH_GEX_REPLY sent [preauth]\
+debug1: SSH2_MSG_NEWKEYS sent [preauth]\
+debug1: expecting SSH2_MSG_NEWKEYS [preauth]\
+debug1: SSH2_MSG_NEWKEYS received [preauth]\
+debug1: KEX done [preauth]\
+debug1: userauth-request for user root service ssh-connection method none [preauth]\
+debug1: attempt 0 failures 0 [preauth]\
+reprocess config line 81: Unsupported option GSSAPIAuthentication\
+debug1: PAM: initializing for "root"\
+debug1: PAM: setting PAM_RHOST to "192.168.56.1"\
+debug1: PAM: setting PAM_TTY to "ssh"\
+debug1: userauth-request for user root service ssh-connection method publickey [preauth]\
+debug1: attempt 1 failures 0 [preauth]\
+debug1: test whether pkalg/pkblob are acceptable [preauth]\
+debug1: temporarily_use_uid: 0/0 (e=0/0)\
+debug1: trying public key file /root/.ssh/authorized_keys\
+debug1: Could not open authorized keys '/root/.ssh/authorized_keys': No such file or directory\
+debug1: restore_uid: 0/0\
+debug1: temporarily_use_uid: 0/0 (e=0/0)\
+debug1: trying public key file /root/.ssh/authorized_keys2\
+debug1: Could not open authorized keys '/root/.ssh/authorized_keys2': No such file or directory\
+debug1: restore_uid: 0/0\
+Failed publickey for root from 192.168.56.1 port 53344 ssh2\
+debug1: userauth-request for user root service ssh-connection method password [preauth]\
+debug1: attempt 2 failures 1 [preauth]\
+debug1: PAM: password authentication accepted for root\
+debug1: do_pam_account: called\
+Accepted password for root from 192.168.56.1 port 53344 ssh2\
+debug1: monitor_read_log: child log fd closed\
+debug1: monitor_child_preauth: root has been authenticated by privileged process\
+debug1: PAM: establishing credentials\
+debug1: Entering interactive session for SSH2.\
+debug1: server_init_dispatch_20\
+debug1: server_input_channel_open: ctype session rchan 0 win 1048576 max 16384\
+debug1: input_session_request\
+debug1: channel 0: new [server-session]\
+debug1: session_new: session 0\
+debug1: session_open: channel 0\
+debug1: session_open: session 0: link with channel 0\
+debug1: server_input_channel_open: confirm session\
+debug1: server_input_global_request: rtype no-more-sessions@openssh.com want_reply 0\
+debug1: server_input_channel_req: channel 0 request pty-req reply 1\
+debug1: session_by_channel: session 0 channel 0\
+debug1: session_input_channel_req: session 0 req pty-req\
+debug1: Allocating pty.\
+debug1: session_pty_req: session 0 alloc /dev/pts/0\
+debug1: Ignoring unsupported tty mode opcode 11 (0xb)\
+debug1: Ignoring unsupported tty mode opcode 17 (0x11)\
+debug1: server_input_channel_req: channel 0 request shell reply 1\
+debug1: session_by_channel: session 0 channel 0\
+debug1: session_input_channel_req: session 0 req shell\
+debug1: Setting controlling tty using TIOCSCTTY.\
+debug1: Received SIGCHLD.\
+debug1: session_by_pid: pid 15710\
+debug1: session_exit_message: session 0 channel 0 pid 15710\
+debug1: session_exit_message: release channel 0\
+debug1: session_pty_cleanup: session 0 release /dev/pts/0\
+Received disconnect from 192.168.56.1: 11: disconnected by user\
+debug1: do_cleanup\
+debug1: PAM: cleanup\
+debug1: PAM: closing session\
+debug1: PAM: deleting credentials\
+}
