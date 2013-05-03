@@ -1,0 +1,19 @@
+2013-05-03 21:52:50 WARN Shibboleth.Application : empty/missing cookieProps setting, set to "https" for SSL/TLS-only usage
+2013-05-03 21:52:50 WARN Shibboleth.Application : handlerSSL should be enabled for SSL/TLS-enabled web sites
+2013-05-03 21:52:50 WARN Shibboleth.Application : no MetadataProvider available, configure at least one for standard SSO usage
+2013-05-03 21:52:50 WARN Shibboleth.AttributeExtractor.XML : attribute mappings are reloadable; be sure to restart web server when adding new attribute IDs
+2013-05-03 21:52:50 WARN Shibboleth.AttributeFilter : removed value at position (0) of attribute (eppn) from (unknown source)
+2013-05-03 21:52:50 WARN Shibboleth.AttributeFilter : no values left, removing attribute (eppn) from (unknown source)
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May  3 21:27:47 2013 from localhost
+$ exit
+CTRL-EVENT-EAP-STARTED EAP authentication started
+CTRL-EVENT-EAP-PROPOSED-METHOD vendor=0 method=21
+CTRL-EVENT-EAP-METHOD EAP vendor 0 method 21 (TTLS) selected
+CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully
