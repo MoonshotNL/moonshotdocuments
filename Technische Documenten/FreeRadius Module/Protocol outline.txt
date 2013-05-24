@@ -1,0 +1,30 @@
+Ruben: 		Environment + Supported Algorithms
+Sebastiaan: Message Format + Carrier Protocol
+Marvin: 	Communication specification
+
+Trajectplan:
+	Het voorgestelde traject: Client->Middleman->Endpoint
+	Client wil verbinden met Endpoint via Middleman (zoals momenteel via Radius al gebeurt)
+	Client stuurt een Access-Request naar de Endpoint, dit komt binnen bij de Middleman
+	Middleman heeft onze module geinstalleerd, die gaat werken zodra het request binnenkomt
+		Eerst detecteren wij of we een Middleman of Endpoint zijn (in dit geval Middleman)
+		Vervolgens kijken wij of er Middleman-specifieke triggers afgaan (Een trigger kan bijvoorbeeld een bepaald Endpoint zijn).
+			Alle triggers gaan af afhankelijk van data afkomstig van de client.	
+		De rest van dit verhaal loopt alleen als de module getriggerd wordt en bij beide Radius servers (Middleman en Endpoint) geinstalleerd is
+	Middleman injecteerd een certificaat in het request en stuurt deze vervolgens door naar het Endpoint
+	Endpoint geeft een AccessAccept terug, injecteerd zijn signature, en injecteerd ook extra info, afhankelijk van Triggers van de Client (bijvoorbeeld een certificaat)
+		De geinjecteerde info wordt geencrypt verstuurd met de Middlemans Public Key d.m.v. RSA
+	De extra info in het terugkomende verkeer wordt bij de Middleman gedecrypt met zijn Private Key
+	De gedecrypte info, en een signature van de Middleman, wordt samen met de AccessAccept door de Middleman doorgestuurd naar de Client
+	
+Activiteiten:
+	SMIME Message Format onderzoeken (welke headers, hoe is het opgebouwd)
+	Radius module, die het volgende moet uitvoeren:
+		Certificaat injecteren
+		Attribuut encrypten (door middel van RSA)
+		Attribuut decrypten
+		Position-Determination ("Ben ik een Middleman of Endpoint, en op welke triggers moet ik dus reageren?")
+		Reagerend op data van de gebruiker (triggers)
+			Deze triggers bepalen wanneer de bovenstaande functies worden uitgevoerd (zie trajectplan hierboven)
+			Relevante data (welke triggers) kan worden ingesteld door admin
+	*Een CertHandling module (eventueel out-of-scope)
